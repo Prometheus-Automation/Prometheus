@@ -346,14 +346,68 @@
 
         // Particles.js
         if (document.getElementById('particles-js')) {
-            particlesJS('particles-js', { /* ... particles.js config ... */ });
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 40,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#7000FF"
+                    },
+                    "shape": {
+                        "type": "circle"
+                    },
+                    "opacity": {
+                        "value": 0.2,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#7000FF",
+                        "opacity": 0.1,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    }
+                }
+            });
         }
         
         // Confetti for all primary CTAs
         document.querySelectorAll('.primary-cta').forEach(button => {
             button.addEventListener('click', () => {
-                // Redirect to Calendly or open booking link
-                window.location.href = 'YOUR_CALENDLY_LINK_HERE';
+                // NOTE: Remember to replace this with your actual Calendly link
+                window.location.href = 'https://calendly.com/your-link';
 
                 if(typeof confetti === 'function') {
                     confetti({
