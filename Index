@@ -4,417 +4,236 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prometheus Automation | Making Your Business Growth Inevitable</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root {
-            --background-white: #fdfcff;
-            --primary-purple: #7000FF;
-            --light-purple: #E9D9FF;
-            --dark-text: #21202c;
-            --light-text: #6d6c77;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--background-white);
-            color: var(--dark-text);
-            overflow-x: hidden;
-            line-height: 1.7;
-        }
+        body { font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-poppins { font-family: 'Poppins', sans-serif; }
 
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; z-index: -2;
-            background: radial-gradient(circle at 10% 20%, var(--light-purple), transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.1), transparent 40%);
-            animation: breath 12s ease-in-out infinite;
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
+        .animate-fadeInUp { animation: fadeInUp 1s ease-out forwards; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
 
-        @keyframes breath {
-            0% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 0.3; }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
         }
-        
-        h1, h2, h3, h4, .logo { font-family: 'Poppins', sans-serif; font-weight: 700; }
-        .cta-btn { font-family: 'Poppins', sans-serif; font-weight: 600; }
-        
-        .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 5%; position: fixed; width: 100%; z-index: 100;
-            background: rgba(253, 252, 255, 0.8); backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(112, 0, 255, 0.1);
-            animation: fadeInDown 0.8s ease;
-        }
-        
-        .logo {
-            font-size: 1.8rem; font-weight: 800;
-            background: var(--primary-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a {
-            color: var(--dark-text); text-decoration: none; font-weight: 600;
-            font-size: 1rem; transition: all 0.3s ease; position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0;
-            width: 0; height: 2px; background: var(--primary-purple);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        
-        .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            text-align: center; justify-content: center; padding: 100px 5% 0;
-            position: relative;
-        }
-        #particles-js {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; z-index: 1;
-        }
-        .hero-content { max-width: 900px; z-index: 10; position: relative; }
-        .hero h1 {
-            font-size: 4rem; margin-bottom: 1.5rem; line-height: 1.2;
-            color: var(--dark-text); animation: fadeInUp 1s ease forwards; opacity: 0;
-        }
-        .hero .highlight {
-            background: linear-gradient(90deg, var(--primary-purple), #C07EFF);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            position: relative; display: inline-block;
-        }
-        .hero .highlight::after {
-            content: ''; position: absolute; bottom: -5px; left: 5%;
-            width: 90%; height: 4px;
-            background: linear-gradient(90deg, var(--primary-purple), #C07EFF);
-            border-radius: 2px; animation: underlinePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes underlinePulse {
-            0% { width: 90%; left: 5%; opacity: 0.8; }
-            50% { width: 100%; left: 0%; opacity: 1; }
-            100% { width: 90%; left: 5%; opacity: 0.8; }
-        }
-
-        .hero p {
-            font-size: 1.3rem; max-width: 700px; margin: 0 auto 2.5rem auto;
-            color: var(--light-text); animation: fadeInUp 1.2s ease forwards; opacity: 0;
-        }
-        
-        .cta-container {
-            display: flex; gap: 1rem; justify-content: center;
-            animation: fadeInUp 1.4s ease forwards; opacity: 0;
-        }
-        .cta-btn {
-            padding: 1.1rem 2.5rem; border-radius: 50px; font-weight: 700;
-            cursor: pointer; transition: all 0.3s ease;
-            border: 2px solid transparent; font-size: 1.1rem; letter-spacing: 0.5px;
-        }
-        .primary-cta {
-            background: var(--primary-purple); color: var(--background-white);
-            box-shadow: 0 10px 25px rgba(112, 0, 255, 0.2);
-        }
-        .secondary-cta {
-            background: transparent; color: var(--primary-purple);
-            border-color: var(--primary-purple);
-        }
-        .cta-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(112, 0, 255, 0.25);
-        }
-        
-        section { padding: 7rem 5%; position: relative; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--dark-text); }
-        .section-header p { max-width: 600px; margin: 0 auto; font-size: 1.2rem; color: var(--light-text); }
-        
-        .use-cases { background: linear-gradient(180deg, rgba(233, 217, 255, 0.2), transparent); }
-        .cases-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem; justify-content: center;
-        }
-        .case-card {
-            background: #fff; border: 1px solid var(--light-purple); border-radius: 20px;
-            padding: 2.5rem; transition: all 0.4s ease; text-align: center;
-            box-shadow: 0 5px 15px rgba(112, 0, 255, 0.05);
-        }
-        .case-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(112, 0, 255, 0.15);
-        }
-        .case-icon { font-size: 3rem; line-height: 1; margin-bottom: 1.5rem; display: inline-block; }
-        .case-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--dark-text); }
-        .case-card p { color: var(--light-text); }
-        
-        .pricing-display { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--light-purple); }
-        .price-amount { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--primary-purple); }
-        .price-period { font-size: 1rem; color: var(--light-text); margin-left: 0.5rem; }
-        .featured-card {
-            position: relative; border: 2px solid var(--primary-purple);
-            transform: scale(1.05); box-shadow: 0 20px 40px rgba(112, 0, 255, 0.15);
-        }
-        .featured-badge {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--primary-purple); color: white; padding: 0.5rem 1.5rem;
-            border-radius: 50px; font-size: 0.9rem; font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .social-proof { padding: 4rem 5%; }
-        .proof-quote {
-            font-size: 2rem; font-family: 'Poppins', sans-serif; font-weight: 600;
-            max-width: 800px; margin: 0 auto 2rem; line-height: 1.4;
-            color: var(--dark-text); text-align: center; position: relative;
-        }
-        .proof-quote::before {
-            content: '“'; position: absolute; top: -1rem; left: -1rem;
-            font-size: 6rem; color: var(--light-purple); z-index: -1; opacity: 0.8;
-        }
-        .quote-author { text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--primary-purple); }
-        
-        .final-cta { padding: 8rem 5%; text-align: center; }
-        .final-cta h2 { font-size: 3.5rem; max-width: 800px; margin: 0 auto; margin-bottom: 2rem; }
-        .final-cta .closing-statement {
-            font-size: 1.5rem; margin: 0 auto 3rem; max-width: 800px;
-            font-weight: 500; color: var(--light-text); line-height: 1.6;
-        }
-        
-        footer { padding: 3rem 5%; text-align: center; background-color: var(--light-purple); color: var(--primary-purple); font-weight: 500; }
-
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-text); }
-        .sr-only {
-            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
-        }
-
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3rem; }
-            .section-header h2, .final-cta h2 { font-size: 2.5rem; }
-        }
-        @media (max-width: 768px) {
-            .nav-links { 
-                display: none; flex-direction: column; gap: 1.5rem;
-                background: rgba(253, 252, 255, 0.95); position: absolute;
-                top: 75px; left: 0; width: 100%; padding: 2rem 0;
-                backdrop-filter: blur(5px);
-            }
-            .nav-links.active { display: flex; }
-            .hamburger { display: block; }
-            .hero h1 { font-size: 2.5rem; }
-            .cta-container { flex-direction: column; align-items: center; }
-            .cta-btn { width: 100%; max-width: 300px; }
-            .cases-container { grid-template-columns: 1fr; }
-        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
     </style>
 </head>
-<body>
-    
-    <nav class="navbar">
-        <div class="logo">Prometheus</div>
-        <div class="nav-links" id="navLinks">
-            <a href="#grind">The Grind</a>
-            <a href="#advantage">Our Process</a>
-            <a href="#cases">Pricing</a>
+<body class="text-gray-800 bg-white">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-tight text-gray-900 font-poppins">Prometheus</a>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none" aria-label="Toggle menu">
+                    <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <ul id="nav-links" class="hidden md:flex md:items-center md:space-x-8 absolute md:static top-16 left-0 right-0 w-full bg-white md:bg-transparent shadow-md md:shadow-none transition-all duration-300 ease-in-out">
+                <li class="text-center md:text-left"><a href="#problem" class="nav-link block px-4 py-3 md:p-0 hover:text-blue-600 transition-colors duration-300">The Grind</a></li>
+                <li class="text-center md:text-left"><a href="#solution" class="nav-link block px-4 py-3 md:p-0 hover:text-blue-600 transition-colors duration-300">Our Process</a></li>
+                <li class="text-center md:text-left"><a href="#offers" class="nav-link block px-4 py-3 md:p-0 hover:text-blue-600 transition-colors duration-300">Pricing</a></li>
+                <li class="text-center md:text-left"><a href="#philosophy" class="nav-link block px-4 py-3 md:p-0 hover:text-blue-600 transition-colors duration-300">Our Philosophy</a></li>
+                <li class="text-center md:text-left p-4 md:p-0">
+                    <button class="primary-cta w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                        Book Discovery Call
+                    </button>
+                </li>
+            </ul>
         </div>
-        <button class="hamburger" id="hamburger">&#9776;</button>
     </nav>
-    
-    <section class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1>Stop Hoping for Growth. <span class="highlight">Start Making It Inevitable.</span></h1>
-            <p>You're an innovator, a builder, a visionary. But the daily grind is stealing your time and energy. We build your perfect AI teammate to handle the repetitive work, so you can get back to doing what only you can do.</p>
-            <div class="cta-container">
-                <button class="cta-btn primary-cta">Book My Free Discovery Call</button>
-                <button class="cta-btn secondary-cta">See a 2-Min Demo</button>
-            </div>
+
+    <section class="relative min-h-screen flex flex-col justify-center pt-20 pb-16 px-4 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        </div>
+        <div class="container mx-auto max-w-4xl relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fadeInUp">
+                Stop Hoping for Growth. <span class="text-blue-600">Start Making It Inevitable.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto animate-fadeInUp delay-200">
+                You're an innovator, a builder, a visionary. But the daily grind is stealing your time and energy. We build your perfect AI teammate to handle the repetitive work, so you can get back to doing what only you can do.
+            </p>
+            <button class="primary-cta px-8 py-4 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 animate-fadeInUp delay-400">
+                Book My Free Discovery Call
+            </button>
         </div>
     </section>
-    
-    <section id="grind" class="grind-section">
-        <div class="section-header">
-            <h2>Does This Grind Sound Familiar?</h2>
-            <p>It's the invisible force that pulls great founders down. The quicksand of "busy work" that suffocates big ideas and makes success feel like a constant struggle.</p>
-        </div>
-        <div class="cases-container">
-            <div class="case-card">
-                <h3>The Hamster Wheel of Tasks</h3>
-                <p>Your day is a blur of emails, reports, and follow-ups. You're working *in* the business, not *on* it. Your true work never gets done.</p>
+
+    <section id="problem" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Does This Grind Sound Familiar?</h2>
+                <p class="text-lg text-gray-600">It's the invisible force that pulls great founders down. The quicksand of "busy work" that suffocates big ideas and makes success feel like a constant struggle.</p>
             </div>
-            <div class="case-card">
-                <h3>The Growth Paradox</h3>
-                <p>To grow, you need to hire. But hiring means more management, more overhead, and less freedom. You're trapped, and scaling feels impossible.</p>
-            </div>
-            <div class="case-card">
-                <h3>The Energy Drain</h3>
-                <p>Your passion is fading, replaced by exhaustion. Your team feels it too. Greatness can't be sustained on fumes.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="advantage" class="solution-section">
-        <div class="section-header">
-            <h2>Our 3-Step Path to Inevitable Scale</h2>
-            <p>We don't sell software; we deliver certainty. This is our proven process for making your operational success a logical outcome.</p>
-        </div>
-        <div class="cases-container">
-            <div class="case-card">
-                <div class="case-icon">1.</div>
-                <h3>Strategy & Mapping</h3>
-                <p>We start with a 90-minute deep dive to identify the single highest-ROI workflow to automate, defining clear KPIs for success.</p>
-            </div>
-            <div class="case-card">
-                <div class="case-icon">2.</div>
-                <h3>Build & Deploy</h3>
-                <p>Our team builds your custom agent in a secure, isolated environment and integrates it seamlessly with your existing tools.</p>
-            </div>
-            <div class="case-card">
-                <div class="case-icon">3.</div>
-                <h3>Inevitable Performance</h3>
-                <p>We provide ongoing monitoring, maintenance, and monthly performance reports. As you grow, your agent scales with you.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="cases" class="use-cases">
-        <div class="section-header">
-            <h2>Choose Your Automation Tier</h2>
-            <p>We structure our partnerships to match your ambition, from automating a single task to transforming an entire department.</p>
-        </div>
-        <div class="cases-container">
-            <div class="case-card">
-                <div class="case-icon">🚀<span class="sr-only">Agent Starter Tier</span></div>
-                <h3>Agent Starter</h3>
-                <p>Make consistent output inevitable. We'll deploy a core agent to handle one critical task with flawless precision, 24/7.</p>
-                <div class="pricing-display">
-                    <span class="price-amount">$1,500</span><span class="price-period">/month</span>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
+                    <h3 class="text-xl font-semibold mb-3">The Hamster Wheel of Tasks</h3>
+                    <p class="text-gray-600">Your day is a blur of emails, reports, and follow-ups. You're working *in* the business, not *on* it. Your true work never gets done.</p>
                 </div>
-            </div>
-            <div class="case-card featured-card">
-                <div class="featured-badge">MOST POPULAR</div>
-                <div class="case-icon">🤝<span class="sr-only">Growth Partner Tier</span></div>
-                <h3>Growth Partner</h3>
-                <p>Make your sales pipeline inevitable. We'll deploy an integrated suite of agents to run your lead generation or customer onboarding system on autopilot.</p>
-                <div class="pricing-display">
-                    <span class="price-amount">$4,000</span><span class="price-period">/month</span>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
+                    <h3 class="text-xl font-semibold mb-3">The Growth Paradox</h3>
+                    <p class="text-gray-600">To grow, you need to hire. But hiring means more management, more overhead, and less freedom. You're trapped, and scaling feels impossible.</p>
                 </div>
-            </div>
-            <div class="case-card">
-                <div class="case-icon">⚙️<span class="sr-only">Performance Scale Tier</span></div>
-                <h3>Performance Scale</h3>
-                <p>A fully custom ecosystem with deep API integrations and dedicated support, designed to transform a major business unit.</p>
-                <div class="pricing-display">
-                    <span class="price-amount">Custom</span><span class="price-period">Let's Talk</span>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 transform transition-transform duration-300 hover:scale-105 hover:shadow-md">
+                    <h3 class="text-xl font-semibold mb-3">The Energy Drain</h3>
+                    <p class="text-gray-600">Your passion is fading, replaced by exhaustion. Your team feels it too. Greatness can't be sustained on fumes.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="proof" class="social-proof">
-        <div class="proof-quote">
-            The future isn't about you vs. automation. It's about your vision, amplified by intelligence. We build AI teammates that execute the day-to-day, so you can focus on the strategic moves that win the market.
+    <section id="solution" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our 3-Step Path to Inevitable Scale</h2>
+                <p class="text-lg text-gray-600">We don't sell software; we deliver certainty. This is our proven process for making your operational success a logical outcome.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto text-blue-600 font-bold text-xl">1</div>
+                    <h3 class="text-xl font-semibold mb-3">Strategy & Mapping</h3>
+                    <p class="text-gray-600">We start with a deep dive to identify the single highest-ROI workflow to automate, defining clear KPIs for success.</p>
+                </div>
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto text-blue-600 font-bold text-xl">2</div>
+                    <h3 class="text-xl font-semibold mb-3">Build & Deploy</h3>
+                    <p class="text-gray-600">Our team builds your custom agent in a secure, isolated environment and integrates it seamlessly with your existing tools.</p>
+                </div>
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto text-blue-600 font-bold text-xl">3</div>
+                    <h3 class="text-xl font-semibold mb-3">Inevitable Performance</h3>
+                    <p class="text-gray-600">We provide ongoing monitoring, maintenance, and monthly performance reports. As you grow, your agent scales with you.</p>
+                </div>
+            </div>
         </div>
-        <div class="quote-author">— The Prometheus Automation Team</div>
     </section>
-    
-    <section class="final-cta">
-        <h2>Ready to Make Your Success a System, Not a Struggle?</h2>
-        <div class="closing-statement">
-            Schedule a 30-minute discovery call. We'll diagnose the primary bottleneck holding you back and map out the first step toward making your operational excellence inevitable.
+
+    <section id="offers" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Choose Your Automation Tier</h2>
+                <p class="text-lg text-gray-600">We structure our partnerships to match your ambition, from automating a single task to transforming an entire department.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-2">Agent Starter</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Make consistent output inevitable. We'll deploy a core agent to handle one critical task with flawless precision, 24/7.</p>
+                    <div class="my-6 text-center"><span class="text-4xl font-bold">$1,500</span><span class="text-gray-500">/mo</span></div>
+                    <button class="primary-cta w-full mt-auto py-3 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition-colors duration-300">Book a Call</button>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-xl border-2 border-blue-600 relative transform md:scale-105 flex flex-col">
+                    <div class="absolute top-0 right-4 -mt-4"><span class="bg-blue-600 text-white text-xs uppercase tracking-wider px-4 py-1 rounded-full">Most Popular</span></div>
+                    <h3 class="text-xl font-semibold mb-2">Growth Partner</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Make your sales pipeline inevitable. We'll deploy an integrated suite of agents to run your lead generation or customer onboarding system on autopilot.</p>
+                    <div class="my-6 text-center"><span class="text-4xl font-bold">$4,000</span><span class="text-gray-500">/mo</span></div>
+                    <button class="primary-cta w-full mt-auto py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300">Start My Transformation</button>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-2">Performance Scale</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">A fully custom ecosystem with deep API integrations and dedicated support, designed to transform a major business unit.</p>
+                    <div class="my-6 text-center"><span class="text-4xl font-bold">Custom</span><span class="text-gray-500 block">Let's Talk</span></div>
+                    <button class="primary-cta w-full mt-auto py-3 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition-colors duration-300">Book a Consultation</button>
+                </div>
+            </div>
         </div>
-        <button class="cta-btn primary-cta">Book My Free Discovery Call</button>
     </section>
-    
-    <footer>
-        <p>© 2025 Prometheus Automation. Let's Build Something Great.</p>
+
+    <section id="philosophy" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-blue-50 rounded-2xl p-8 md:p-12 border-l-4 border-blue-600">
+                    <blockquote class="relative">
+                        <p class="text-xl md:text-2xl font-medium text-gray-800 italic">"The future isn't about you vs. automation. It's about your vision, amplified by intelligence. We build AI teammates that execute the day-to-day, so you can focus on the strategic moves that win the market."</p>
+                        <footer class="mt-6"><div class="text-blue-600 font-semibold">— The Prometheus Automation Team</div></footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Make Your Success a System, Not a Struggle?</h2>
+                <p class="text-lg text-gray-300 mb-10">Schedule a 30-minute discovery call. We'll diagnose the primary bottleneck holding you back and map out the first step toward making your operational excellence inevitable.</p>
+                <button class="primary-cta px-8 py-4 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+                    Book My Free Discovery Call
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div class="text-gray-600 mb-4 md:mb-0">© 2025 Prometheus Automation. All rights reserved.</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors duration-300">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors duration-300">Terms</a>
+                </div>
+            </div>
+        </div>
     </footer>
-    
+
     <script>
-        // Hamburger Menu Toggle
-        document.getElementById('hamburger').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
 
-        // Particles.js
-        if (document.getElementById('particles-js')) {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 40,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#7000FF"
-                    },
-                    "shape": {
-                        "type": "circle"
-                    },
-                    "opacity": {
-                        "value": 0.2,
-                        "random": true
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#7000FF",
-                        "opacity": 0.1,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1.5,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    }
-                }
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+                menuIconOpen.classList.toggle('hidden');
+                menuIconClose.classList.toggle('hidden');
             });
-        }
-        
-        // Confetti for all primary CTAs
-        document.querySelectorAll('.primary-cta').forEach(button => {
-            button.addEventListener('click', () => {
-                // NOTE: Remember to replace this with your actual Calendly link
-                window.location.href = 'https://calendly.com/your-link';
 
-                if(typeof confetti === 'function') {
-                    confetti({
-                        particleCount: 150, spread: 80, origin: { y: 0.6 },
-                        colors: ['#7000FF', '#E9D9FF', '#FFD700']
-                    });
-                }
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!navLinks.classList.contains('hidden')) {
+                        navLinks.classList.add('hidden');
+                        menuIconOpen.classList.remove('hidden');
+                        menuIconClose.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Handle CTA clicks
+            document.querySelectorAll('.primary-cta').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Fire confetti
+                    if (window.confetti) {
+                        window.confetti({
+                            particleCount: 150,
+                            spread: 80,
+                            origin: { y: 0.6 },
+                            colors: ['#3B82F6', '#FBBF24', '#ffffff'] // Blue, Yellow, White
+                        });
+                    }
+                    // Redirect to booking link
+                    window.location.href = 'https://calendly.com/prometheus-prometheusautomation/30min';
+                });
             });
         });
     </script>
