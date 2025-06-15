@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prometheus Automation | Custom AI Agents for Business</title>
+    <title>Prometheus Automation | Making Your Business Growth Inevitable</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -231,7 +231,7 @@
     <section class="hero">
         <div id="particles-js"></div>
         <div class="hero-content">
-            <h1>Stop Running in Circles. Start <span class="highlight">Unlocking Your Genius.</span></h1>
+            <h1>Stop Hoping for Growth. <span class="highlight">Start Making It Inevitable.</span></h1>
             <p>You're an innovator, a builder, a visionary. But the daily grind is stealing your time and energy. We build your perfect AI teammate to handle the repetitive work, so you can get back to doing what only you can do.</p>
             <div class="cta-container">
                 <button class="cta-btn primary-cta">Book My Free Discovery Call</button>
@@ -243,7 +243,7 @@
     <section id="grind" class="grind-section">
         <div class="section-header">
             <h2>Does This Grind Sound Familiar?</h2>
-            <p>It's the invisible force that pulls great founders down. The quicksand of "busy work" that suffocates big ideas.</p>
+            <p>It's the invisible force that pulls great founders down. The quicksand of "busy work" that suffocates big ideas and makes success feel like a constant struggle.</p>
         </div>
         <div class="cases-container">
             <div class="case-card">
@@ -263,8 +263,8 @@
     
     <section id="advantage" class="solution-section">
         <div class="section-header">
-            <h2>Our 3-Step Deployment Partnership</h2>
-            <p>We don't sell software; we deliver operational outcomes. This is our process for ensuring a clear, measurable return on your investment.</p>
+            <h2>Our 3-Step Path to Inevitable Scale</h2>
+            <p>We don't sell software; we deliver certainty. This is our proven process for making your operational success a logical outcome.</p>
         </div>
         <div class="cases-container">
             <div class="case-card">
@@ -279,7 +279,7 @@
             </div>
             <div class="case-card">
                 <div class="case-icon">3.</div>
-                <h3>Performance & Scale</h3>
+                <h3>Inevitable Performance</h3>
                 <p>We provide ongoing monitoring, maintenance, and monthly performance reports. As you grow, your agent scales with you.</p>
             </div>
         </div>
@@ -294,7 +294,7 @@
             <div class="case-card">
                 <div class="case-icon">🚀<span class="sr-only">Agent Starter Tier</span></div>
                 <h3>Agent Starter</h3>
-                <p>Perfect for automating a single, high-volume task. We'll deploy a core agent to save you time and lay the foundation for future automation.</p>
+                <p>Make consistent output inevitable. We'll deploy a core agent to handle one critical task with flawless precision, 24/7.</p>
                 <div class="pricing-display">
                     <span class="price-amount">$1,500</span><span class="price-period">/month</span>
                 </div>
@@ -303,7 +303,7 @@
                 <div class="featured-badge">MOST POPULAR</div>
                 <div class="case-icon">🤝<span class="sr-only">Growth Partner Tier</span></div>
                 <h3>Growth Partner</h3>
-                <p>An integrated suite of agents to manage a core business function, like lead generation or customer onboarding.</p>
+                <p>Make your sales pipeline inevitable. We'll deploy an integrated suite of agents to run your lead generation or customer onboarding system on autopilot.</p>
                 <div class="pricing-display">
                     <span class="price-amount">$4,000</span><span class="price-period">/month</span>
                 </div>
@@ -327,9 +327,9 @@
     </section>
     
     <section class="final-cta">
-        <h2>Let's Find Your First Automation Win.</h2>
+        <h2>Ready to Make Your Success a System, Not a Struggle?</h2>
         <div class="closing-statement">
-            On a 30-minute discovery call, we'll diagnose your primary operational bottleneck and determine if an AI agent is the right strategic fit to solve it. No pressure, no fluff—just a clear assessment.
+            Schedule a 30-minute discovery call. We'll diagnose the primary bottleneck holding you back and map out the first step toward making your operational excellence inevitable.
         </div>
         <button class="cta-btn primary-cta">Book My Free Discovery Call</button>
     </section>
@@ -352,6 +352,9 @@
         // Confetti for all primary CTAs
         document.querySelectorAll('.primary-cta').forEach(button => {
             button.addEventListener('click', () => {
+                // Redirect to Calendly or open booking link
+                window.location.href = 'YOUR_CALENDLY_LINK_HERE';
+
                 if(typeof confetti === 'function') {
                     confetti({
                         particleCount: 150, spread: 80, origin: { y: 0.6 },
